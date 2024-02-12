@@ -23,11 +23,7 @@ class AdminService extends Service {
     if (!admin || !admin.email || !bcrypt.compareSync(data.password, admin.password)) {
       return http.error(null, responseCode.NOT_AUTHORIZED, ['El correo y la contraseña no coinciden'])
     }
-
-    if (admin?.status === 'inactive') {
-      return http.error(null, responseCode.PERMISSION_DENIED, ['Esta cuenta de administrador esta desactivada'])
-    }
-
+    
     delete admin.dataValues.password
     const token = tokenize.create(admin.id, 'ADMIN')
     return http.response({ data: { ...admin.dataValues, is_admin: true }, token }, responseCode.OK, 'Autenticación exitosa')

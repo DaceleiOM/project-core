@@ -1,12 +1,14 @@
 const Admin = require('./models/admin')
-const Girl = require('./models/girl')
 const Country = require('./models/country');
 const State = require('./models/state');
 const City = require('./models/city');
+const Branch = require('./models/branch');
+const Manager = require('./models/manager');
+const Brand = require('./models/brand');
+const BrandCategory = require('./models/brand_category');
+const ProductCategory = require('./models/product_category');
+const Product = require('./models/product');
 
-// relationship one to many girls-Admin
-Girl.belongsTo(Admin, { foreignKey: 'admin_id', as: 'admin' });
-Admin.hasMany(Girl, { foreignKey: 'adminId', as: 'girls' }); 
 
 // relationship one to many states-country
 State.belongsTo(Country, { foreignKey: 'country_id', as: 'country' });
@@ -16,15 +18,26 @@ Country.hasMany(State, { foreignKey: 'country_id', as: 'states' });
 City.belongsTo(State, { foreignKey: 'state_id', as: 'state' });
 State.hasMany(City, { foreignKey: 'state_id', as: 'cities' });
 
-// relationship one to many girls-city
-Girl.belongsTo(City, { foreignKey: 'city_id', as: 'city' });
-City.hasMany(Girl, { foreignKey: 'city_id', as: 'girls' });
+// relationship beetwene cities and branches
+City.hasMany(Branch, { foreignKey: 'city_id', as: 'branches' });
+Branch.belongsTo(City, { foreignKey: 'city_id', as: 'city' });
 
-// relationship one to many girls-state
-Girl.belongsTo(State, { foreignKey: 'state_id', as: 'state' });
-State.hasMany(Girl, { foreignKey: 'state_id', as: 'girls' });
+// relationship beetwene branches and managers
+Branch.hasMany(Manager, { foreignKey: 'branch_id', as: 'managers' });
+Manager.belongsTo(Branch, { foreignKey: 'branch_id', as: 'branch' });
 
-// relationship beetwen admins and countries
-Admin.belongsTo(Country, { foreignKey: 'country_id', as: 'country' });
-Country.hasMany(Admin, { foreignKey: 'country_id', as: 'admins' });
+// relationship beetwene brands and branchs
+Brand.hasMany(Branch, { foreignKey: 'brand_id', as: 'branches' });
+Branch.belongsTo(Brand, { foreignKey: 'brand_id', as: 'brand' });
 
+// relationship beetwene brand and admins
+Brand.hasOne(Admin, { foreignKey: 'brand_id', as: 'admin' });
+Admin.belongsTo(Brand, { foreignKey: 'brand_id' });
+
+// relationship beetwene brands and brandcategories
+Brand.hasMany(BrandCategory, { foreignKey: 'brand_id', as: 'brand_categories' });
+BrandCategory.belongsTo(Brand, { foreignKey: 'brand_id' });
+
+// relationship beetwene brandcategories and products in table product_categories
+BrandCategory.belongsToMany(Product, { through: ProductCategory, foreignKey: 'category_id', as: 'products' });
+Product.belongsToMany(BrandCategory, { through: ProductCategory, foreignKey: 'product_id', as: 'categories' });

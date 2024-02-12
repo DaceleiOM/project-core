@@ -11,6 +11,10 @@ Admin.init({
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4
   },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   email: {
     type: DataTypes.STRING,
     unique: true,
@@ -26,24 +30,17 @@ Admin.init({
       this.setDataValue('password', value ? bcrypt.hashSync(value, 12) : null)
     }
   },
-  is_agency: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false, 
-  },
-  tokens: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    defaultValue: 0
+  brand_id: {
+    type: DataTypes.UUID,
+    allowNull: false
   },
   created_at: DataTypes.DATE,
   updated_at: DataTypes.DATE,
-  deleted_at: DataTypes.DATE
 }, {
   sequelize,
   modelName: 'admins',
   createdAt: 'created_at',
   updatedAt: 'updated_at',
-  deletedAt: 'deleted_at'
 })
 
 module.exports = Admin
