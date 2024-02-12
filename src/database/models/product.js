@@ -23,7 +23,7 @@ Product.init({
     allowNull: false
   },
   images: {
-    type: DataTypes.ARRAY(DataTypes.TEXT),
+    type: DataTypes.STRING,
     defaultValue: [],
     allowNull: true
   },

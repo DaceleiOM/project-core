@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const brandController = require('../../controllers/brand')
-//thi is a change
+
 router.post(
     '/create', 
     brandController.create
