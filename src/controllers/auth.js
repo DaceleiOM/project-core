@@ -36,18 +36,18 @@ class AuthController {
         .status(responseCode.SERVER_ERROR)
         .json(http.error(null, responseCode.SERVER_ERROR, [e.message]))
     }
-}
-
-static async managerLogin (req, res) {
-  try {
-    const data = req.body
-    return res.json(await ManagerService.login(data))
-  } catch (e) {
-    return res
-      .status(responseCode.SERVER_ERROR)
-      .json(http.error(null, responseCode.SERVER_ERROR, [e.message]))
   }
-}
+
+  static async managerLogin (req, res) {
+    try {
+      const data = req.body
+      return res.json(await ManagerService.login(data))
+    } catch (e) {
+      return res
+        .status(responseCode.SERVER_ERROR)
+        .json(http.error(null, responseCode.SERVER_ERROR, [e.message]))
+    }
+  }
   
 }
 

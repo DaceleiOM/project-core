@@ -25,4 +25,10 @@ router.delete(
     productCategoryController.delete
 )
 
+router.get(
+    '/product-by-branchid/:id',
+    productCategoryController.getProductByBranchId
+)
+
+
 module.exports = router

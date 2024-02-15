@@ -7,6 +7,10 @@ class BrandService extends Service {
     this.repository = new BrandRepository()
   }
 
+  async getAll () {
+    return await this.repository.getAll()
+  }
+
   async create (data) {
     const brand = await this.repository.create(data)
     if (!brand) throw new NotFoundError('brand doesnt exist')

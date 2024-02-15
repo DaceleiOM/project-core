@@ -26,6 +26,19 @@ class ProductCategoryService extends Service {
     const deleteRelation = await this.repository.remove(id)
     return deleteRelation
   }
+
+  async getProductByBranchId (branchId) {
+    const product = await this.repository.getAll({
+      where: { branch_id: branchId },
+      attributes: { exclude: ['created_at', 'updated_at'] },
+      include: [{
+        model: Brand,
+        as: 'brands',
+        attributes: { exclude: ['created_at', 'updated_at'] }
+      }]
+    })
+    return product
+  }
 }
 
 module.exports = ProductCategoryService

@@ -6,6 +6,11 @@ class BrandController {
     this.service = new BrandService()
   }
 
+  async getAll () {
+    const brands = await this.service.getAll()
+    return [brands, 'brands:']
+  }
+
   async create (req) {
     const data = req.body
     const brand = await this.service.create(data)

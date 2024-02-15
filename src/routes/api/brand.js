@@ -16,5 +16,10 @@ router.delete(
     brandController.delete
 )
 
+router.get(
+    '/getall',
+    brandController.getAll
+)
+
 
 module.exports = router
