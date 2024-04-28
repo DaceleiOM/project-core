@@ -3,6 +3,13 @@ const authenticate = require('../../middlewares/authenticate')
 const checkRoles = require('../../middlewares/check_roles')
 const branchController = require('../../controllers/branch')
 
+
+router.get(
+    '/by-brand/:BrandId',
+    branchController.getByBrand
+)
+
+
 router.post(
     '/create', 
     authenticate,

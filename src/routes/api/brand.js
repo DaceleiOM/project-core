@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const brandController = require('../../controllers/brand')
+const multipartFormDataParser = require('../../middlewares/multipart_form_data_parser')
 
 router.post(
     '/create', 
@@ -21,5 +22,10 @@ router.get(
     brandController.getAll
 )
 
+router.post(
+    '/create-logo/:id',
+    multipartFormDataParser.any(),
+    brandController.createLogo
+)
 
 module.exports = router

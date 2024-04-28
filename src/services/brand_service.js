@@ -33,11 +33,12 @@ class BrandService extends Service {
   }
 
   async createLogo (id, file) {
-    const logo = await this.isExist(id, 'logo not found')
     const folder = 'brands/'
     const url = await StorageService.uploadImage(file, folder)
-    if (logo?.images) await StorageService.deleteImage(logo.images)
-    const updatedLogo= await this.repository.update(id, { images: url })
+    console.log(id)
+    console.log(url)
+
+    const updatedLogo= await this.repository.update(id, { logo: url })
     return updatedLogo[1][0]
   }
 }
