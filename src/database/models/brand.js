@@ -14,6 +14,14 @@ Brand.init({
     type: DataTypes.STRING,
     allowNull: true,
   },
+  logo: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   created_at: DataTypes.DATE,
   updated_at: DataTypes.DATE,
 }, {

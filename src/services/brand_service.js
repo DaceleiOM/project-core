@@ -1,5 +1,6 @@
 const Service = require('./service')
 const BrandRepository = require('../repositories/brand_repository')
+const StorageService = require('../utils/storage_service')
 
 class BrandService extends Service {
   constructor () {
@@ -29,6 +30,15 @@ class BrandService extends Service {
     if (!brand) { throw new Error('brand not found') }
     const deleteBrand = await this.repository.remove(id)
     return deleteBrand
+  }
+
+  async createLogo (id, file) {
+    const logo = await this.isExist(id, 'logo not found')
+    const folder = 'brands/'
+    const url = await StorageService.uploadImage(file, folder)
+    if (logo?.images) await StorageService.deleteImage(logo.images)
+    const updatedLogo= await this.repository.update(id, { images: url })
+    return updatedLogo[1][0]
   }
 }
 

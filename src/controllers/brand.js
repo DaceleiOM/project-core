@@ -29,6 +29,13 @@ class BrandController {
     const brand = await this.service.delete(id)
     return [brand, 'Delete brand was succesfull']
   }
+
+  async createLogo (req) {
+    const id = req.params.id
+    const file = req.files[0]
+    const logo = await this.service.createLogo(id, file)
+    return [logo, 'the image uploaded successfully']
+  }
 }
 
 const brandController = new BrandController()
