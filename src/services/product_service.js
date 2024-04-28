@@ -1,7 +1,6 @@
 const Service = require('./service')
 const ProductRepository = require('../repositories/product_repository')
 const StorageService = require('../utils/storage_service')
-const StorageService = require('../utils/storage_service')
 
 class ProductService extends Service {
   constructor () {

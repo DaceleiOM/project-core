@@ -1,7 +1,6 @@
 const Controller = require('../decorators/controller')
 const ProductService = require('../services/product_service')
 const db = require('../config/firebase');
-const db = require('../config/firebase');
 
 class ProductController {
   constructor () {
