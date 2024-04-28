@@ -6,22 +6,25 @@ const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
 
 class StorageService {
   
-  static async uploadImageToStorage(fileBuffer, fileName) {
-    const storageRef = ref(storage, fileName);
-    await uploadBytes(storageRef, fileBuffer);
+  static async uploadImageToStorage(fileBuffer, fileName, metadata, folder) {
+    const storageRef = ref(storage, `${folder}/${fileName}`);
+    await uploadBytes(storageRef, fileBuffer, metadata);
     const downloadURL = await getDownloadURL(storageRef);
     return downloadURL;
   }
 
-  static async uploadImage(id, file) {
+  static async uploadImage(file, folder) {
     try {
-        const fileName = `${uuidv4()}-${file.originalname}`;
-        const imageUrl = await StorageService.uploadImageToStorage(file.buffer, fileName);        
+        const fileName = file.originalname || 'defaultFileName';
+        const metadata = {
+          contentType: file.mimetype
+        };
+        const imageUrl = await StorageService.uploadImageToStorage(file.buffer, fileName, metadata, folder);        
         const docRef = await db.collection('products').add({
-            ...file,
-            imageUrl: imageUrl
-        });
-        console.log(docRef)
+          ...file,
+          imageUrl: imageUrl
+      });
+      
         return imageUrl;
     } catch (error) {
         console.error('Error al subir y guardar la imagen:', error);
