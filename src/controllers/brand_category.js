@@ -6,6 +6,12 @@ class BrandCategoryController {
     this.service = new BrandCategoryService()
   }
 
+  async getByBrand (req) {
+    const id = req.params.BrandId
+    const categories = await this.service.getByBrand(id)
+    return [categories, 'categories:']
+  }
+
   async create (req) {
     const data = req.body
     const brandCategory = await this.service.create(data)

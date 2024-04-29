@@ -25,10 +25,17 @@ class ProductCategoryController {
     return [relation, 'Delete relation was succesfull']
   }
 
-  async getProductByBranchId (req) {
-    const BranchId = req.params.branchId
-    const products = await this.service.getByBrandId(BranchId)
+  async getProductsByBrand (req) {
+    const brandId = req.params.brandId
+    const products = await this.service.getProductsByBrand(brandId)
     return [products, 'Get by BrandId is succesfull']
+  }
+
+  async getProductsByCategory (req){
+    const category = req.params.brandCategoryId
+    const products = await this.service.getProductsByCategory(category)
+    return [products, 'Get by category is succesfull']
+
   }
 }
 

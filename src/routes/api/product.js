@@ -33,4 +33,9 @@ router.post(
     productController.createImage
 )
 
+router.get(
+    '/get-by-id/:id',
+    productController.getById
+)
+
 module.exports = router

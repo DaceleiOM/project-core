@@ -4,6 +4,12 @@ const productCategoryController = require('../../controllers/product_category')
 const authenticate = require('../../middlewares/authenticate')
 const checkRoles = require('../../middlewares/check_roles')
 
+router.get(
+    '/by-brand/:BrandId',
+    productCategoryController.getByBrand
+)
+
+
 router.post(
     '/create', 
     authenticate,
@@ -26,8 +32,13 @@ router.delete(
 )
 
 router.get(
-    '/product-by-branchid/:id',
-    productCategoryController.getProductByBranchId
+    '/product-by-brandid/:brandId',
+    productCategoryController.getProductsByBrand
+)
+
+router.get(
+    '/product-by-category/:brandCategoryId',
+    productCategoryController.getProductsByCategory
 )
 
 

@@ -6,6 +6,14 @@ class BrandCategoryService extends Service {
     super(new BrandCategoryRepository())
     this.repository = new BrandCategoryRepository()
   }
+  
+  async getByBrand(BrandId) {
+    return await this.repository.get({
+      where: {
+        brand_id: BrandId
+      }
+    });
+  }
 
   async create (data) {
     const brandCategory = await this.repository.create(data)

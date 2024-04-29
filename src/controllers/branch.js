@@ -6,8 +6,8 @@ class BranchController {
     this.service = new BranchService()
   }
   async getByBrand (req) {
-    const id = req.params.id
-    const branches = await this.service.getByBrand(id)
+    const BrandId = req.params.BrandId
+    const branches = await this.service.getByBrand(BrandId)
     return [branches, 'branches:']
   }
   async create (req) {

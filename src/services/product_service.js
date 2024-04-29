@@ -35,6 +35,12 @@ class ProductService extends Service {
     const updatedProduct= await this.repository.update(id, { images: url })
     return updatedProduct[1][0]
   }
+
+  async getById (id){
+    const product = await this.repository.getById(id)
+
+    return product
+  }
 }
 
 module.exports = ProductService

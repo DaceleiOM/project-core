@@ -33,6 +33,13 @@ class ProductController {
     return [productImage, 'the image uploaded successfully']
   }
   
+  async getById (req){
+    const id = req.params.id
+    const product = await this.service.getById(id)
+    return [product, 'product was succesfull']
+
+  }
+  
 } 
 
 const productController = new ProductController()
