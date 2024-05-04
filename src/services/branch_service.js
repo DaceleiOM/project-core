@@ -6,6 +6,13 @@ class BranchService extends Service {
     super(new BranchRepository())
     this.repository = new BranchRepository()
   }
+  async getByBrand(BrandId) {
+    return await this.repository.get({
+      where: {
+        brand_id: BrandId
+      }
+    });
+  }
 
   async create (data) {
     const branch = await this.repository.create(data)

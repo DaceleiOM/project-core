@@ -1,5 +1,8 @@
 const Service = require('./service')
 const ProductCategoryRepository = require('../repositories/product_category_repository')
+const sequelize = require('../database/connection')
+const Sequelize = require('sequelize');
+const Product = require('../database/models/product')
 
 class ProductCategoryService extends Service {
   constructor () {
@@ -27,18 +30,48 @@ class ProductCategoryService extends Service {
     return deleteRelation
   }
 
-  async getProductByBranchId (branchId) {
-    const product = await this.repository.getAll({
-      where: { branch_id: branchId },
-      attributes: { exclude: ['created_at', 'updated_at'] },
-      include: [{
-        model: Brand,
-        as: 'brands',
-        attributes: { exclude: ['created_at', 'updated_at'] }
-      }]
-    })
-    return product
+  async getProductsByBrand(brandId) {
+    try {
+      const productIds = await sequelize.query(
+        `SELECT product_id
+         FROM product_categories
+         WHERE brand_category_id IN (
+             SELECT id
+             FROM brand_categories
+             WHERE brand_id = :brandId
+         )`,
+        {
+          replacements: { brandId },
+          type: Sequelize.QueryTypes.SELECT
+        }
+      );
+      const ids = productIds.map((row) => row.product_id);
+
+      const products = await Product.findAll({
+        where: { id: ids }
+      });
+
+      return products;
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      throw error;
+    }
   }
+
+  async getProductsByCategory (brandCategoryId){
+    const productIds = await this.repository.get({
+      where: {
+        brand_category_id: brandCategoryId
+      }
+    });
+    const ids = productIds.map((row) => row.product_id);
+
+    const products = await Product.findAll({
+      where: { id: ids }
+    });
+    return products
+  }
+
 }
 
 module.exports = ProductCategoryService

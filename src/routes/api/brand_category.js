@@ -25,4 +25,10 @@ router.delete(
     brandCategoryController.delete
 )
 
+
+router.get(
+    '/get-by-brandId/:BrandId',
+    brandCategoryController.getByBrand
+
+)
 module.exports = router
