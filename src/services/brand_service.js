@@ -11,6 +11,9 @@ class BrandService extends Service {
   async getAll () {
     return await this.repository.getAll()
   }
+  async getById (id) {
+    return await this.repository.getById(id)
+  }
 
   async create (data) {
     const brand = await this.repository.create(data)

@@ -11,6 +11,12 @@ class BrandController {
     return [brands, 'brands:']
   }
 
+  async getById (req) {
+    const id = req.params.id
+    const brands = await this.service.getById(id)
+    return [brands, 'brands:']
+  }
+
   async create (req) {
     const data = req.body
     const brand = await this.service.create(data)
