@@ -22,6 +22,11 @@ router.get(
     brandController.getAll
 )
 
+router.get(
+    '/getById/:id',
+    brandController.getById
+)
+
 router.post(
     '/create-logo/:id',
     multipartFormDataParser.any(),
