@@ -7,28 +7,28 @@ const checkRoles = require('../../middlewares/check_roles')
 router.post(
     '/create', 
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Root', 'Admin']),
     productController.create
 )
 
 router.put(
     '/edit/:id', 
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     productController.update
 )
 
 router.delete(
     '/delete/:id',
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     productController.delete
 )
 
 router.post(
     '/create-image/:id',
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     multipartFormDataParser.any(),
     productController.createImage
 )

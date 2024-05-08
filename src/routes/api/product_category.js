@@ -13,21 +13,21 @@ router.get(
 router.post(
     '/create', 
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     productCategoryController.create
 )
 
 router.put(
     '/edit/:id', 
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     productCategoryController.update
 )
 
 router.delete(
     '/delete/:id',
     authenticate,
-    checkRoles(['MANAGER', 'ADMIN']),
+    checkRoles(['Manager', 'Admin', 'Root']),
     productCategoryController.delete
 )
 
