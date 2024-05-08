@@ -13,12 +13,14 @@ router.post(
 
 router.put(
     '/edit/:id', 
+    authenticate,
     checkRoles(['Root']),
     brandController.update
 )
 
 router.delete(
     '/delete/:id',
+    authenticate,
     checkRoles(['Root']),
     brandController.delete
 )
@@ -35,6 +37,7 @@ router.get(
 
 router.post(
     '/create-logo/:id',
+    authenticate,
     checkRoles(['Root']),
     multipartFormDataParser.any(),
     brandController.createLogo
