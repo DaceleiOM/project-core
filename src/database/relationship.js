@@ -8,7 +8,7 @@ const Brand = require('./models/brand');
 const BrandCategory = require('./models/brand_category');
 const ProductCategory = require('./models/product_category');
 const Product = require('./models/product');
-
+const User = require ('./models/user')
 
 // relationship one to many states-country
 State.belongsTo(Country, { foreignKey: 'country_id', as: 'country' });
@@ -41,3 +41,11 @@ BrandCategory.belongsTo(Brand, { foreignKey: 'brand_id' });
 // relationship beetwene brandcategories and products in table product_categories
 BrandCategory.belongsToMany(Product, { through: ProductCategory, foreignKey: 'category_id', as: 'products' });
 Product.belongsToMany(BrandCategory, { through: ProductCategory, foreignKey: 'product_id', as: 'categories' });
+
+// relationship beetwen User and brand
+User.belongsTo(Brand, { foreignKey: 'brandId', as: 'brand' });
+Brand.hasOne(User, { foreignKey: 'brandId' });
+
+// relationship beetwen User and branch
+User.belongsTo(Branch, { foreignKey: 'branchId', as: 'branch' });
+Branch.hasOne(User, { foreignKey: 'branchId' })

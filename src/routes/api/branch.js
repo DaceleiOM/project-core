@@ -13,21 +13,21 @@ router.get(
 router.post(
     '/create', 
     authenticate,
-    checkRoles(['ADMIN']),
+    checkRoles(['Admin', 'Root']),
     branchController.create
 )
 
 router.put(
     '/edit/:id', 
     authenticate,
-    checkRoles(['ADMIN']),
+    checkRoles(['Admin', 'Root']),
     branchController.update
 )
 
 router.delete(
     '/delete/:id',
     authenticate,
-    checkRoles(['ADMIN']),
+    checkRoles(['Admin', 'Root']),
     branchController.delete
 )
 

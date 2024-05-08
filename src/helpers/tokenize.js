@@ -1,17 +1,17 @@
-const jwt = require('jwt-simple')
-const dayjs = require('dayjs')
+const jwt = require('jwt-simple');
+const dayjs = require('dayjs');
 
 module.exports = {
-  create: (userId, type = 'UNKOWN') => {
+  create: (userId, roles = []) => {
     const payload = {
       sub: {
         user_id: userId,
-        user_type: type.toUpperCase(),
-        pusher_channel: `${type.toUpperCase()}_${userId}` // MANAGER_asd-123-asd-123-asd
+        rol: roles.map(role => role.toUpperCase()),
+        pusher_channel: roles.map(role => role.toUpperCase()).join('_') + `_${userId}`
       },
       iat: dayjs().unix(),
       exp: dayjs().add(3, 'month').endOf('month').unix()
-    }
-    return jwt.encode(payload, process.env.TOKEN_SECRET_KEY)
+    };
+    return jwt.encode(payload, process.env.TOKEN_SECRET_KEY);
   }
-}
+};
