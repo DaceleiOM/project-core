@@ -14,6 +14,10 @@ BrandCategory.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   parent_id: {
     type: DataTypes.UUID,
     allowNull: true

@@ -9,7 +9,6 @@ router.get(
     branchController.getByBrand
 )
 
-
 router.post(
     '/create', 
     authenticate,

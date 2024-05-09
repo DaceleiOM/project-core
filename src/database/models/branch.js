@@ -14,7 +14,23 @@ Branch.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   phone: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  facebook: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  instagram: {
     type: DataTypes.STRING,
     allowNull: true
   },

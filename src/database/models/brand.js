@@ -12,7 +12,11 @@ Brand.init({
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
+  },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   logo: {
     type: DataTypes.STRING,
