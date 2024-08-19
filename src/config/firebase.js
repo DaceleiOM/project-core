@@ -21,7 +21,7 @@ if (!admin.apps.length) {
     // Carga desde archivo en desarrollo
     const path = require('path');
     const fs = require('fs');
-    const serviceAccountPath = path.join(__dirname, 'firebase.json');
+    const serviceAccountPath = path.join(__dirname, '../../firebase.json');
     serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
   }
 

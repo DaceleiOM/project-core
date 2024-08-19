@@ -1,11 +1,13 @@
-const Sequelize = require('sequelize');
+require('dotenv').config();  // Importa y configura dotenv para cargar variables de entorno
 
-// Construye la URL de conexión si usas variables separadas
-const databaseUrl = `mysql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(databaseUrl, {
-    dialect: 'mysql',
-    dialectModule: require('mysql2')
+// Construye la URL de conexión usando variables de entorno
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',  // Especifica el dialecto de la base de datos
+    port: process.env.DB_PORT,
+    dialectModule: require('mysql2') // Asegúrate de que mysql2 está instalado
 });
 
 module.exports = sequelize;

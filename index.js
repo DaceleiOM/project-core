@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const apiRouter = require('./src/routes/index');
 
 // Configura Firebase y otras dependencias aquí
+require('./src/database/config');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,8 +16,7 @@ if (process.env.ENV === 'local') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 }
 
-require('./src/database/config');
-
+// Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,5 +30,12 @@ app.get('/', (req, res) => (
   res.status(200).json({ message: 'core en línea!' })
 ));
 
-// Exporta la aplicación para que Vercel pueda usarla como una función
-module.exports = app;
+// En entorno local, iniciar el servidor
+if (process.env.ENV === 'local') {
+  app.listen(port, () => {
+    console.log(`Servidor en http://localhost:${port}`);
+  });
+} else {
+  // Exporta la aplicación para Vercel
+  module.exports = app;
+}
