@@ -18,6 +18,14 @@ Branch.init({
     type: DataTypes.STRING,
     allowNull: true
   },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   city_id: {
     type: DataTypes.UUID,
     allowNull: false

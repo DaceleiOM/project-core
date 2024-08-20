@@ -14,6 +14,10 @@ Brand.init({
     type: DataTypes.STRING,
     allowNull: true,
   },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   logo: {
     type: DataTypes.STRING,
     allowNull: true,
